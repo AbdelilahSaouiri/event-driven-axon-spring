@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: event-driven
+  jpa:
+    generate-ddl: true
+server:
+  port: 8085
+
