@@ -2,9 +2,28 @@ services:
   mariadb:
     image: 'mariadb:latest'
     environment:
-      - 'MARIADB_DATABASE=event-store'
-      - 'MARIADB_PASSWORD=abdelilah'
-      - 'MARIADB_ROOT_PASSWORD=root'
-      - 'MARIADB_USER=abdelilah'
+      - MARIADB_DATABASE=event-store
+      - MARIADB_PASSWORD=abdelilah
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_USER=abdelilah
     ports:
-      - '3306'
+      - '3306:3306'
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - '90:80'
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+    depends_on:
+      - mariadb
+    restart: always
+
+volumes:
+  mariadb_data:
+    driver: local
