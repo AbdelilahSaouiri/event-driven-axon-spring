@@ -1,0 +1,10 @@
+services:
+  mariadb:
+    image: 'mariadb:latest'
+    environment:
+      - 'MARIADB_DATABASE=event-store'
+      - 'MARIADB_PASSWORD=abdelilah'
+      - 'MARIADB_ROOT_PASSWORD=root'
+      - 'MARIADB_USER=abdelilah'
+    ports:
+      - '3306'
