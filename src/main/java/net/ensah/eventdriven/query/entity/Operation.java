@@ -1,5 +1,6 @@
 package net.ensah.eventdriven.query.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,5 +19,6 @@ public class Operation {
     @Enumerated(EnumType.STRING)
     private OperationType operationType;
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Account account;
 }

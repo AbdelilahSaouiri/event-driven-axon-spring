@@ -1,15 +1,21 @@
 package net.ensah.eventdriven.query.service;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import net.ensah.eventdriven.commun.GetAllAccountsQuery;
 import net.ensah.eventdriven.commun.events.AccountCreatedEvent;
 import net.ensah.eventdriven.query.entity.Account;
 import net.ensah.eventdriven.query.repository.AccountRepository;
 import net.ensah.eventdriven.query.repository.OperationRepository;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
+@Transactional
 public class AccountServiceHandler {
 
     private final AccountRepository accountRepository;
@@ -32,6 +38,10 @@ public class AccountServiceHandler {
                 event.getCurrency(),
                null
         ));
+    }
 
+    @QueryHandler
+    public List<Account>  getAllAccounts(GetAllAccountsQuery query) {
+        return accountRepository.findAll();
     }
 }
