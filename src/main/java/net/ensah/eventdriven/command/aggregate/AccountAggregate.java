@@ -26,7 +26,6 @@ public class AccountAggregate {
     @CommandHandler
     public AccountAggregate(CreateAccountCommand<String> createAccountCommand) {
         //buisness logic
-
         if(createAccountCommand.getInitialBalance()<0)
             throw new IllegalArgumentException("Initial balance cannot be negative");
 
